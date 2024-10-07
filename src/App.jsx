@@ -4,8 +4,8 @@ import DetailsPage from "./pages/DetailsPage";
 import ProductsPage from "./pages/ProductsPage";
 import Layout from "./layout/Layout";
 
-import ProductProvider from "./context/ProductContext";
-import CardProvider from "./context/CardContext";
+//import ProductProvider from "./context/ProductContext";
+//import CardProvider from "./context/CardContext";
 
 import { Routes , Route , Navigate } from "react-router-dom";
 
@@ -14,8 +14,8 @@ function App() {
 
 
   return (
-      <CardProvider>
-        <ProductProvider>
+    //  <CardProvider>
+    //    <ProductProvider>
             <Layout>
                 <Routes>
                     <Route path="/" element={<Navigate to="/products" replace /> }  />
@@ -25,8 +25,8 @@ function App() {
                     <Route path="/*" element={<PageNotFund/>}  />
                 </Routes>
             </Layout>
-        </ProductProvider>
-    </CardProvider>
+    //    </ProductProvider>
+    //</CardProvider>
   );
 }
 
