@@ -5,19 +5,18 @@ import { productQuantity, shortenText } from '../helper/helper';
 import { MdDeleteOutline } from 'react-icons/md';
 
 import styles from "./Card.module.css"
-// import { useCard } from '../context/CardContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, decrese, increase, removeItem } from '../features/cart/cartSlice';
 
 function Card({data}) {
     const {id, title , image , price } = data;
 
-    // const [state , dispatch] = useCard();
+    const state = useSelector(store => store.cart)
+    const dispatch = useDispatch()
 
-    // const quantity = productQuantity(state , id)
-    const quantity = 0;
+    const quantity = productQuantity(state, id);
 
-    const cliclHandler = (type) => {
-        // dispatch({type , payload: data})
-    }
+
   return (
     <div className={styles.card} >
         <img  src={image} alt={title} />
@@ -26,21 +25,21 @@ function Card({data}) {
         <div className={styles.actions} >
             <Link to={`/products/${id}`} > <TbListDetails/> </Link>
             <div>
-                { quantity === 1 && (<button onClick={()=> cliclHandler("REMOVE_ITEM")} >
+                { quantity === 1 && (<button onClick={()=> dispatch(removeItem(data))} >
                     <MdDeleteOutline/> 
                     </button>)}
                {
-                    quantity > 1 && (<button onClick={()=> cliclHandler("DECREASE")} >
+                    quantity > 1 && (<button onClick={()=> dispatch(decrese(data))} >
                     - 
                     </button>) 
                }
                {!!quantity && <span>{quantity}</span> }
                 {
                     quantity === 0 ? (
-                    <button onClick={()=> cliclHandler("ADD_ITEM")} >
+                    <button onClick={()=> dispatch(addItem(data))} >
                     <TbShoppingBagCheck/> 
                     </button>):(
-                    <button onClick={()=> cliclHandler("INCREASE")} >+</button>)
+                    <button onClick={()=> dispatch(increase(data))} >+</button>)
                 }
 
 
